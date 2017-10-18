@@ -1,6 +1,8 @@
 #ifndef BTree_included
 #define BTree_included
 
+/* Used code Dr. Freudenthal made for the demo as a template */
+
 typedef struct BTreeNode{
   struct BTreeNode *lChild;
   struct BTreeNode *rChild;
@@ -8,14 +10,14 @@ typedef struct BTreeNode{
   char *lName;
 }BTreeNode;
 
-/*typedef struct{
-  BTreeNode *root;
-}BTree;*/
-
 BTreeNode *BTreeAlloc();
 
-BTreeNode *insert(BTreeNode *tree, char *fN, char *lN);
-BTreeNode *delete();
-void print(BTreeNode *tree, char *fN, char *lN);
+BTreeNode *insertNode(BTreeNode *tree, char *fN, char *lN);
+
+BTreeNode *deleteNode(BTreeNode *tree, char *fN, char *lN);
+
+BTreeNode *searcNode(BTreeNode *tree, char *fN, char *lN);
+
+void printTree(BTreeNode *tree);
 
 #endif

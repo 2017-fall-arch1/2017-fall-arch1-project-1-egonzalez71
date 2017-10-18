@@ -1,33 +1,50 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <assert.h>
 #include "BTree.h"
 
+/* Used Dr. Freudenthal's code as a template */
+
 BTreeNode *BTreeAlloc(){
-  BTreeNode *tree = (BTreeNode *)malloc(sizeof(BTreeNode));
+  BTreeNode *tree = (BTreeNode *)malloc(2*sizeof(BTreeNode));
   tree->lChild=NULL;
   tree->rChild=NULL;
   return tree;
 }
 
-BTreeNode *insert(BTreeNode *tree, char *fN, char *lN){
-  BTreeNode *newNode = BTreeAlloc();
-  if(tree == NULL){
+BTreeNode *insertNode(BTreeNode *tree, char *fN, char *lN){
+  BTreeNode *newNode;
+  if(tree->fName == NULL){
+    newNode = BTreeAlloc();
     newNode->fName = fN;
     newNode->lName = lN;
     return newNode;
-  }else if(strcmp()<0||strcmp()==0){
-    tree->lChild = insert(newNode, fN, lN);
-  }else if(strcmp()<0){
-    tree->rChild = insert(newNode, fN, lN);
+  }else if(strcmp(tree->fName,fN)<0||strcmp(tree->fName,fN)==0){
+    newNode = BTreeAlloc();
+    tree->lChild = insertNode(newNode, fN, lN);
+  }else if(strcmp(tree->fName,fN)>0){
+    newNode = BTreeAlloc();
+    tree->rChild = insertNode(newNode, fN, lN);
   }
   return tree;
 }
 
-BTreeNode *delete(){
+BTreeNode *deleteNode(BTreeNode *tree, char *fN, char *lN){
 
 }
 
-void print(BTreeNode *tree, char *fN, char lN){
-  printf("%c\n",tree->fName);
+BTreeNode *searchNode(BTreeNode *tree, char *fN, char *lN){
+  if((tree->fName == fN) && (tree->lName == lN)){
+
+  }
+}
+
+void printTree(BTreeNode *tree){
+  if(!tree->lChild==NULL){
+    printTree(tree->lChild);
+  }else if(!tree->rChild==NULL){
+    printTree(tree->rChild);
+  }
+  printf("%s\t%s\n",tree->fName, tree->lName);
 }
