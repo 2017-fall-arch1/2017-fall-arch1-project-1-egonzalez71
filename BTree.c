@@ -37,7 +37,13 @@ BTreeNode *deleteNode(BTreeNode *tree, char *fN, char *lN){
 BTreeNode *searchNode(BTreeNode *tree, char *fN, char *lN){
   if((tree->fName == fN) && (tree->lName == lN)){
 
+  }else if(!tree->lChild==NULL){
+    searchNode(tree->lChild);
+  }else if(!tree->rChild==NULL){
+    searchNode(tree->rChild);
   }
+
+  printf("Employee not in tree");
 }
 
 void printTree(BTreeNode *tree){
