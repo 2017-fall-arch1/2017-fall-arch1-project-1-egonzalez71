@@ -6,51 +6,47 @@
 
 /* Used Dr. Freudenthal's code as a template */
 
+/* Creates a new node for the binary search tree */
 BTreeNode *BTreeAlloc(){
-  BTreeNode *tree = (BTreeNode *)malloc(2*sizeof(BTreeNode));
+  BTreeNode *tree = (BTreeNode *)malloc(sizeof(BTreeNode));
   tree->lChild=NULL;
   tree->rChild=NULL;
   return tree;
 }
 
-BTreeNode *insertNode(BTreeNode *tree, char *fN, char *lN){
-  BTreeNode *newNode;
-  if(tree->fName == NULL){
-    newNode = BTreeAlloc();
-    newNode->fName = fN;
-    newNode->lName = lN;
+/* Adds a new node to the tree, checking whether the tree is empty
+ * or if the new data is smaller or larger */
+BTreeNode *insertNode(BTreeNode *tree, char *n){
+  if(tree==NULL){
+    BTreeNode *newNode = BTreeAlloc();
+    newNode->name = n;
     return newNode;
-  }else if(strcmp(tree->fName,fN)<0||strcmp(tree->fName,fN)==0){
-    newNode = BTreeAlloc();
-    tree->lChild = insertNode(newNode, fN, lN);
-  }else if(strcmp(tree->fName,fN)>0){
-    newNode = BTreeAlloc();
-    tree->rChild = insertNode(newNode, fN, lN);
+  }
+  int c = strcmp(tree->name,n);
+  printf("%d\n",c);
+  if(c<0 || c==0){
+    tree->lChild = insertNode(tree->lChild, n);
+  }else if(c > 0){
+    tree->rChild = insertNode(tree->rChild, n);
   }
   return tree;
 }
 
-BTreeNode *deleteNode(BTreeNode *tree, char *fN, char *lN){
+BTreeNode *deleteNode(BTreeNode *tree, char *n){
+
 
 }
 
-BTreeNode *searchNode(BTreeNode *tree, char *fN, char *lN){
-  if((tree->fName == fN) && (tree->lName == lN)){
+BTreeNode *searchNode(BTreeNode *tree, char *n){
 
-  }else if(!tree->lChild==NULL){
-    searchNode(tree->lChild);
-  }else if(!tree->rChild==NULL){
-    searchNode(tree->rChild);
-  }
-
-  printf("Employee not in tree");
 }
 
+/* Prints out all the employee names from the binary search tree  */
 void printTree(BTreeNode *tree){
-  if(!tree->lChild==NULL){
-    printTree(tree->lChild);
-  }else if(!tree->rChild==NULL){
-    printTree(tree->rChild);
+  if(tree==NULL){
+    return;
   }
-  printf("%s\t%s\n",tree->fName, tree->lName);
+  printTree(tree->lChild);
+  printf("%s\n",tree->name);
+  printTree(tree->rChild);
 }

@@ -7,15 +7,33 @@
 /* Used the demo code that was provided as a template */
 
 int main(){
-  BTreeNode *root = BTreeAlloc();
-  char *fName = "adam";
-  char *lName = "smith";
-  char *fName2 = "jane";
-  char *lName2 = "doe";
+  BTreeNode *root = NULL;
+  char *name = (char *)malloc(50);
+  char continueResponse = 'y';
 
-  root = insertNode(root, fName, lName);
-  root = insertNode(root, fName2, lName2);
 
-  printTree(root);
+  /* */
+  while(continueResponse == 'y'){
+    printf("Insert(i), Delete(d), or Read(r)\n");
 
+    char userResponse = getchar();
+    while((getchar())!='\n');
+    
+    if(userResponse == 'i'){
+      printf("Enter name:\n");
+      name = fgets(name, 50, stdin);
+      root = insertNode(root, name);
+    }
+    if(userResponse == 'd'){
+      printf("entered delete\n");
+    }
+    if(userResponse == 'r'){
+      printTree(root);
+    }
+    
+    printf("Do you want to continue?(y/n)\n");
+    continueResponse = getchar();
+
+    while((getchar())!='\n');
+  }
 }

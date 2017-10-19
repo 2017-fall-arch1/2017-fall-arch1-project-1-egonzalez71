@@ -6,18 +6,21 @@
 typedef struct BTreeNode{
   struct BTreeNode *lChild;
   struct BTreeNode *rChild;
-  char *fName;
-  char *lName;
+  char *name;
 }BTreeNode;
 
+/* Creates a new node for the list  */
 BTreeNode *BTreeAlloc();
 
-BTreeNode *insertNode(BTreeNode *tree, char *fN, char *lN);
+/* Inserts a new employee in the binary search tree */
+BTreeNode *insertNode(BTreeNode *tree, char *n);
 
-BTreeNode *deleteNode(BTreeNode *tree, char *fN, char *lN);
+/* Deletes an employee from the binary search tree */
+BTreeNode *deleteNode(BTreeNode *tree, char *n);
 
-BTreeNode *searcNode(BTreeNode *tree, char *fN, char *lN);
+BTreeNode *searcNode(BTreeNode *tree, char *n);
 
+/* Prints all the employee names from the tree */
 void printTree(BTreeNode *tree);
 
 #endif
