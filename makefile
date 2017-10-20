@@ -2,7 +2,7 @@
 CFLAGS=-g -O3
 
 BTreeTest:BTree.o BTreeTest.o
-	cc BTree.o BTreeTest.o -o test
+	cc BTree.o BTreeTest.o -o BTreeTest
 
 BTree.o:BTree.c BTree.h
 	cc -c $(CFLAGS) BTree.c
@@ -13,6 +13,5 @@ BTreeTest.o:BTreeTest.c BTree.h
 clean:
 	rm -f *.o BTreeTest
 
-demo: test
-	./test
-
+demo: BTreeTest
+	./BTreeTest

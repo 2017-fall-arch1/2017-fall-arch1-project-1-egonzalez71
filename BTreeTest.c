@@ -11,22 +11,30 @@ int main(){
   char *name = (char *)malloc(50);
   char continueResponse = 'y';
 
-
   /* */
   while(continueResponse == 'y'){
     printf("Insert(i), Delete(d), or Read(r)\n");
 
     char userResponse = getchar();
     while((getchar())!='\n');
-    
+
+    /* Gets name from user to insert in binary search tree */
     if(userResponse == 'i'){
       printf("Enter name:\n");
       name = fgets(name, 50, stdin);
-      root = insertNode(root, name);
+      char *nameCopy =(char *)malloc(50);
+      strcpy(nameCopy,name);
+      root = insertNode(root, nameCopy);
     }
+    /* Gets name from user to delete from binary search tree */
     if(userResponse == 'd'){
-      printf("entered delete\n");
+      printf("Enter name:\n");
+      name = fgets(name, 50, stdin);
+      char *nameCopy = (char *)malloc(50);
+      strcpy(nameCopy, name);
+      root = deleteNode(root, nameCopy);
     }
+    /* Calls printTree to print all employee names */
     if(userResponse == 'r'){
       printTree(root);
     }
